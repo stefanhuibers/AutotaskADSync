@@ -1,12 +1,10 @@
 # Variables
-$groupName = "Baseline - App - Autotask Contacts Sync"
-$appId = "939b40ad-5c52-4ad3-befe-467d3c83ce76"
+$groupName           = "Baseline - App - Autotask Contacts Sync"
 $groupMembershipRule = "(user.assignedPlans -any (((assignedPlan.servicePlanId -eq `"9aaf7827-d63c-4b61-89c3-182f06f82e5c`") -or (assignedPlan.servicePlanId -eq `"efb87545-963c-4e0d-99df-69c6916d9eb0`") -or (assignedPlan.servicePlanId -eq `"4a82b400-a79f-41a4-b4e2-e94f5787b113`")) -and assignedPlan.capabilityStatus -eq `"Enabled`") )-and (user.accountEnabled -eq true) -and (user.userType -eq `"Member`") -and (user.givenName -ne null) -and (user.surname -ne null)"
+$appId               = "939b40ad-5c52-4ad3-befe-467d3c83ce76"
 $mailTo = "g.varekamp@xantion.nl"
 $graphModules = @("Microsoft.Graph.Authentication", "Microsoft.Graph.Groups", "Microsoft.Graph.Identity.DirectoryManagement")
 $scopes = @("Group.ReadWrite.All", "Organization.Read.All")
-$group = $null
-
 function Install-GraphdModule {
     param(
         [string]$moduleName
@@ -48,10 +46,11 @@ catch {
 }
 
 # Check if the group already exists
+$group = $null
 $existingGroup = Get-MgGroup -Filter "displayName eq '$groupName'" -ErrorAction SilentlyContinue
 if ($existingGroup) {
     Write-Host "Group '$groupName' already exists." -ForegroundColor Yellow
-    $confirmation = Read-Host "Do you want want to remove the group '$groupName'? (y/n)"
+    $confirmation = Read-Host "Do you want want to remove the current group '$groupName'? (y/n)"
     if ($confirmation -eq 'y') {
         try {
             Remove-MgGroup -GroupId $existingGroup.Id -Confirm:$false
