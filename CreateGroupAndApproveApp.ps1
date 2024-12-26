@@ -102,10 +102,18 @@ Beste applicatiebeheerder,
 
 Voor de klant $tenantDisplayName kan Active Directory (AD) Synchronization in Autotask worden ingesteld.
 
-Client ID: $appId
-Tenant: $tenantId
-Client Secret: <a href='https://xantion.eu.itglue.com/757545073688811/passwords/4017876740374726'>Klik hier om de client secret op te halen</a>
-Group ID: $($group.Id)
+Client ID:
+$appId
+
+Tenant:
+$tenantId
+
+Client Secret:
+https://xantion.eu.itglue.com/757545073688811/passwords/4017876740374726
+
+Group ID:
+$($group.Id)
+
 "@
 $mailtoUrl = "mailto:$mailTo`?subject=$([uri]::EscapeDataString($subject))&body=$([uri]::EscapeDataString($body))"
 Write-Host "Opening email client..." -ForegroundColor Yellow
