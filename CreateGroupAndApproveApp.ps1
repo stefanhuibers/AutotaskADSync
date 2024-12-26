@@ -1,6 +1,6 @@
 # Variables
 $groupName = "Baseline - App - Autotask Contacts Sync"
-$appUrl = "https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=939b40ad-5c52-4ad3-befe-467d3c83ce76&scope=https://graph.microsoft.com/.default"
+$appId = "939b40ad-5c52-4ad3-befe-467d3c83ce76"
 $groupMembershipRule = "(user.assignedPlans -any (((assignedPlan.servicePlanId -eq `"9aaf7827-d63c-4b61-89c3-182f06f82e5c`") -or (assignedPlan.servicePlanId -eq `"efb87545-963c-4e0d-99df-69c6916d9eb0`") -or (assignedPlan.servicePlanId -eq `"4a82b400-a79f-41a4-b4e2-e94f5787b113`")) -and assignedPlan.capabilityStatus -eq `"Enabled`") )-and (user.accountEnabled -eq true) -and (user.userType -eq `"Member`") -and (user.givenName -ne null) -and (user.surname -ne null)"
 $mailTo = "g.varekamp@xantion.nl"
 $graphModules = @("Microsoft.Graph.Authentication", "Microsoft.Graph.Groups", "Microsoft.Graph.Identity.DirectoryManagement")
@@ -90,7 +90,7 @@ if (-not $group) {
 }
 
 # Open the app consent URL
-$customAppURL = $appUrl.Replace("organizations", $tenantId)
+$appUrl = "https://login.microsoftonline.com/$tenantId/v2.0/adminconsent?client_id=$appId&scope=https://graph.microsoft.com/.default"
 Start-Process $customAppURL
 Write-Host "Please provide the required permissions to the application and press Enter to continue..." -ForegroundColor Yellow
 Read-Host
@@ -102,7 +102,9 @@ Beste applicatiebeheerder,
 
 Voor de klant $tenantDisplayName kan Active Directory (AD) Synchronization in Autotask worden ingesteld.
 
-Tenant ID: $tenantId
+Client ID: $appId
+Tenant: $tenantId
+Client Secret: <a href='https://xantion.eu.itglue.com/757545073688811/passwords/4017876740374726'>Klik hier om de client secret op te halen</a>
 Group ID: $($group.Id)
 "@
 $mailtoUrl = "mailto:$mailTo`?subject=$([uri]::EscapeDataString($subject))&body=$([uri]::EscapeDataString($body))"
