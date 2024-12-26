@@ -1,5 +1,5 @@
 # Variables
-$groupName = "Baseline - App - Autotask Contacts Sync2"
+$groupName = "Baseline - App - Autotask Contacts Sync"
 $appUrl = "https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=939b40ad-5c52-4ad3-befe-467d3c83ce76&scope=https://graph.microsoft.com/.default"
 $groupMembershipRule = "(user.assignedPlans -any (((assignedPlan.servicePlanId -eq `"9aaf7827-d63c-4b61-89c3-182f06f82e5c`") -or (assignedPlan.servicePlanId -eq `"efb87545-963c-4e0d-99df-69c6916d9eb0`") -or (assignedPlan.servicePlanId -eq `"4a82b400-a79f-41a4-b4e2-e94f5787b113`")) -and assignedPlan.capabilityStatus -eq `"Enabled`") )-and (user.accountEnabled -eq true) -and (user.userType -eq `"Member`") -and (user.givenName -ne null) -and (user.surname -ne null)"
 $mailTo = "g.varekamp@xantion.nl"
