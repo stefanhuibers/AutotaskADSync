@@ -91,7 +91,7 @@ if (-not $group) {
 
 # Open the app consent URL
 $appUrl = "https://login.microsoftonline.com/$tenantId/v2.0/adminconsent?client_id=$appId&scope=https://graph.microsoft.com/.default"
-Start-Process $customAppURL
+Start-Process $appUrl
 Write-Host "Please provide the required permissions to the application and press Enter to continue..." -ForegroundColor Yellow
 Read-Host
 
