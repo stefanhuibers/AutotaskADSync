@@ -78,6 +78,7 @@ if (-not $group) {
         groupTypes                    = @("DynamicMembership")
         membershipRule                = $groupMembershipRule
         membershipRuleProcessingState = "On"
+        ErroraAction                  = "Stop"
     }
     try {
         $group = New-MgGroup -BodyParameter $params
@@ -85,6 +86,9 @@ if (-not $group) {
     }
     catch {
         Write-Host "Error creating group '$groupName': $($_.Exception.Message)" -ForegroundColor Red
+        Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
+        Read-Host "Press Enter to exit..."
+        exit 1
     }
 }
 
