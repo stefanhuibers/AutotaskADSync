@@ -5,7 +5,7 @@ $AppId                 = "939b40ad-5c52-4ad3-befe-467d3c83ce76"
 $MailTo                = "g.varekamp@xantion.nl"
 $MicrosoftGraphModules = @("Microsoft.Graph.Groups")
 $MicrosoftGraphScopes  = @("Group.ReadWrite.All", "Organization.Read.All")
-$script:WriteLog       = $true
+$script:WriteLog       = $false
 
 function Write-Log {
     param (
